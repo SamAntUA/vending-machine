@@ -38,8 +38,7 @@ HELLO_SCREEN_FOOTER;
 do {
     $stdinHandler = fopen('php://stdin', 'r');
     $plu = (int)fgets($stdinHandler);
-    flush();
-} while (!in_array($plu, [1, 2, 3]));
+} while (!in_array($plu, array_keys(PRODUCTS_INFO_MAP)));
 
 $productName = PRODUCTS_INFO_MAP[$plu]['name'];
 $price = PRODUCTS_INFO_MAP[$plu]['price'];
@@ -59,10 +58,10 @@ do {
     echo printDeposit($deposit, $price) . PHP_EOL;
 } while ($deposit < $price);
 echo 'Money accepted.' . PHP_EOL;
-sleep(1);
 
 // Give a change out (if so)
 if ($deposit > $price) {
+    sleep(1);
     $changeRemained = $deposit - $price;
     echo 'Don\'t forget your change: ' . $changeRemained;
 
